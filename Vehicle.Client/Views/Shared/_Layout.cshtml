@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="#">لوگو</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="d-flex flex-row">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            @Html.Partial("_LoginPartial")
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container body-content" style="margin-top:64px">
+        @RenderBody()
+        <hr />
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">صفحه اصلی</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">امکانات</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">سوال و جواب</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">درباره ما</a></li>
+            </ul>
+            <p class="text-center text-muted">سیستم نقلیه کارمندان</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

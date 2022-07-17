@@ -1,0 +1,42 @@
+﻿@model Vehicle.Client.Models.RegisterVm
+@{
+    ViewBag.Title = "Register";
+}
+
+<div id="Register">
+
+    <h1><strong>خوش آمدید</strong> لطفا ثبت نام کنید</h1>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <form>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <fieldset>
+
+                <p>@Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "ایمیل" })</p>
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                <p>@Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "تلفن" })</p>
+                @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+
+
+                <p>@Html.TextBoxFor(m => m.Password, new { @class = "form-control", placeholder = "رمز عبور" })</p>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                <p>@Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "تکرار رمز عبور" })</p>
+                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+
+
+                <p><input type="submit" value="ثبت نام"></p>
+
+            </fieldset>
+
+        </form>
+    }
+
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

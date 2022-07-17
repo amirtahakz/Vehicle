@@ -1,0 +1,35 @@
+﻿@model Vehicle.Client.Models.ExternalLoginListVm
+@using Microsoft.Owin.Security
+
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0)
+    {
+        <div>
+            <p>
+                No external login
+            </p>
+        </div>
+    }
+    else
+    {
+        <p><span class="btn-round">or</span></p>
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+<div id="socialLoginList">
+    <p>
+        @foreach (AuthenticationDescription p in loginProviders)
+        {
+        <p>
+
+            <a class="external-login-before"><span class="fontawesome-google"></span></a>
+            <button type="submit" class="external-login" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">Login Using @p.AuthenticationType</button>
+
+        </p>
+    }
+        </p>
+    </div>
+        }
+    }
+}

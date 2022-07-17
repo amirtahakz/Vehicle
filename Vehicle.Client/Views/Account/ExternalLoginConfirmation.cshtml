@@ -1,0 +1,33 @@
+﻿@model Vehicle.Client.Models.ExternalLoginConfirmationVm
+@{
+    ViewBag.Title = "Register";
+}
+
+
+
+<div id="Register">
+
+    <h1><strong>Welcome.</strong> Please login.</h1>
+    @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <form>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <fieldset>
+
+                <p>@Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })</p>
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                <p><input type="submit" value="Register"></p>
+
+            </fieldset>
+
+        </form>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

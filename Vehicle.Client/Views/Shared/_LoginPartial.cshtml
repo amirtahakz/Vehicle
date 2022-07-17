@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <li class="nav-item">
+            @Html.ActionLink("سلام " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link active" })
+        </li>
+        <li class="nav-item">
+            <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link active">خروج</a>
+        </li>
+    }
+}
+else
+{
+    <li class="nav-item">
+        @Html.ActionLink("ثبت نام", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link active" })
+    </li>
+    <li class="nav-item">
+        @Html.ActionLink("ورود", "Login", "Account", null, htmlAttributes: new { id = "registerLink", @class = "nav-link active" })
+    </li>
+}
