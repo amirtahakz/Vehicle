@@ -21,6 +21,10 @@ namespace Vehicle.Data.Context
             return new ApplicationDbContext();
         }
 
+        //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
+        public DbSet<Entities.Vehicle> Vehicles { get; set; }
+        public DbSet<VehicleRequest> VehicleRequests { get; set; }
+        public DbSet<VehicleRequestConfirmed> VehicleRequestConfirmeds { get; set; }
     }
 }

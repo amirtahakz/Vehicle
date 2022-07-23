@@ -1,23 +1,24 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOut", "Account", new { area = "" } , FormMethod.Post, new { id = "logoutForm" }))
     {
         @Html.AntiForgeryToken()
+        @*@ActionLink("سلام " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link active" })*@
         <li class="nav-item">
-            @Html.ActionLink("سلام " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link active" })
+            <a class="nav-link-custom" aria-current="page" href="#">سلام @User.Identity.GetUserName()</a>
         </li>
         <li class="nav-item">
-            <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link active">خروج</a>
+            <a class="nav-link-custom" href="javascript:document.getElementById('logoutForm').submit()">خروج</a>
         </li>
     }
 }
 else
 {
     <li class="nav-item">
-        @Html.ActionLink("ثبت نام", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link active" })
+        @Html.ActionLink("ثبت نام", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link-custom" })
     </li>
     <li class="nav-item">
-        @Html.ActionLink("ورود", "Login", "Account", null, htmlAttributes: new { id = "registerLink", @class = "nav-link active" })
+        @Html.ActionLink("ورود", "Login", "Account", null, htmlAttributes: new { id = "registerLink", @class = "nav-link-custom" })
     </li>
 }

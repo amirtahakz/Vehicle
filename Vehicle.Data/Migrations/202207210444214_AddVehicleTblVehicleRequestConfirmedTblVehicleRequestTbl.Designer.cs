@@ -7,13 +7,13 @@ namespace Vehicle.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class EditApplicationUser : IMigrationMetadata
+    public sealed partial class AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(EditApplicationUser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl));
         
         string IMigrationMetadata.Id
         {
-            get { return "202207131217087_EditApplicationUser"; }
+            get { return "202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl"; }
         }
         
         string IMigrationMetadata.Source

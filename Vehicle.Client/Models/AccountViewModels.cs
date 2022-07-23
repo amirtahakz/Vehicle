@@ -116,5 +116,6 @@ namespace Vehicle.Client.Models
         public const string Manager = "Manager";
         public const string Employee = "Employee";
         public const string Secretary = "Secretary";
+        public const string Driver = "Driver";
     }
 }

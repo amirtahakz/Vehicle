@@ -14,8 +14,6 @@ namespace Vehicle.Client.Controllers
             return View();
         }
 
-        [Authorize(Roles = UserRolesVm.Manager)]
-
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

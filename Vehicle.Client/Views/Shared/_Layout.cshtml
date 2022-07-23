@@ -6,34 +6,45 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css/Global")
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top main-nav shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="#">لوگو</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="#" style="color:black!important;font-weight:bold!important;">لوگو</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="تبديل التنقل">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div class="d-flex flex-row">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link-custom" aria-current="page" href="#">صفحه اصلی</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link-custom" href="#">درباره ما</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <ul class="navbar-nav">
                             @Html.Partial("_LoginPartial")
                         </ul>
-                    </div>
+                    </form>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container body-content" style="margin-top:64px">
-        @RenderBody()
+    <div class="container-fluid body-content">
+        <main>
+            @RenderBody()
+        </main>
         <hr />
         <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">صفحه اصلی</a></li>
+                <li class="nav-item"><a href="/Home/Index" class="nav-link px-2 text-muted">صفحه اصلی</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">امکانات</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">سوال و جواب</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">درباره ما</a></li>
+                <li class="nav-item"><a href="/Home/Contact" class="nav-link px-2 text-muted">درباره ما</a></li>
             </ul>
             <p class="text-center text-muted">سیستم نقلیه کارمندان</p>
         </footer>
@@ -43,3 +54,5 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+

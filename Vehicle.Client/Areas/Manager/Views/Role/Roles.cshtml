@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Roles";
+}
+<div class="mt-5 col-11" style="height:100%">
+    <p class="h1">مدیریت نقش ها</p>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoleModal">
+        اضافه کردن نقش
+    </button>
+    <!-- Button trigger modal -->
+    <table class="table table-striped table-hover" id="roles-tbl-manager">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ای دی</th>
+                <th scope="col">نام نقش</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*data will apear*@
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addRoleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">اضافه کردن نقش</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">اسم نقش</label>
+                        <input type="email" class="form-control" id="add-role-txtbox" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">لطفا به انگلیسی وارد کنید</div>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="add-role-btn">افزودن</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->

@@ -11,6 +11,22 @@ namespace Vehicle.Client
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/Manager").Include(
+                        "~/Scripts/Custom/Manager/ManagerServices.js",
+                        "~/Scripts/Custom/Manager/ManagerScripts.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/Secretary").Include(
+                        "~/Scripts/Custom/Secretary/SecretaryServices.js",
+                        "~/Scripts/Custom/Secretary/SecretaryScripts.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/Employee").Include(
+                        "~/Scripts/Custom/Employee/EmployeeServices.js",
+                        "~/Scripts/Custom/Employee/EmployeeScripts.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/Driver").Include(
+                        "~/Scripts/Custom/Driver/DriverServices.js",
+                        "~/Scripts/Custom/Driver/DriverScripts.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -22,10 +38,11 @@ namespace Vehicle.Client
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.bundle.min.js"));
 
+            bundles.Add(new StyleBundle("~/Content/css/Global").Include(
+                      "~/Content/Custom/Global/Styles.css"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.rtl.css",
-                      "~/Content/site.css",
-                      "~/Content/Style.css"));
+                      "~/Content/bootstrap.rtl.css"));
         }
     }
 }

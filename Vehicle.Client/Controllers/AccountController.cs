@@ -25,9 +25,9 @@ namespace Vehicle.Client.Controllers
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private IExampleService _exampleService;
-        private IEmailService _emailService;
-        private ApplicationRoleManager _roleManager = null;
+        private ApplicationRoleManager _roleManager;
+        private readonly IExampleService _exampleService;
+        private readonly IEmailService _emailService;
 
         public AccountController(IExampleService exampleService, IEmailService emailService)
         {
@@ -35,45 +35,13 @@ namespace Vehicle.Client.Controllers
             _emailService = emailService;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager,
+            ApplicationSignInManager signInManager,
+            ApplicationRoleManager roleManager)
         {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
-
-        protected ApplicationRoleManager RoleManager
-        {
-            get
-            {
-                return _roleManager ?? Request.GetOwinContext().GetUserManager<ApplicationRoleManager>();
-            }
-            private set
-            {
-                _roleManager = value;
-            }
-        }
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            this._userManager = userManager;
+            this._signInManager = signInManager;
+            this._roleManager = roleManager;
         }
 
 
@@ -98,37 +66,48 @@ namespace Vehicle.Client.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var user = await UserManager.FindByEmailAsync(model.Email);
+            var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "User not found!");
                 return View(model);
             }
 
-            //if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+            //if (!await _userManager.IsEmailConfirmedAsync(user.Id))
             //{
             //    ModelState.AddModelError(string.Empty, "Please confirm your email");
             //    return View(model);
             //}
 
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            if (!user.ManagerConfirmed)
+            {
+                ModelState.AddModelError(string.Empty, "Please wait for manager confirmation");
+                return View(model);
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+
             switch (result)
             {
                 case SignInStatus.Success:
-                    if (UserManager.IsInRole(user.Id, "Manager"))
+                    if (await _userManager.IsInRoleAsync(user.Id, "Manager"))
                     {
-                        RedirectToAction("Index", "Home", new { area = "Manager" });
+                        return RedirectToAction("Index", "Home", new { area = "Manager" });
                     }
-                    if (UserManager.IsInRole(user.Id, "Secretary"))
+                    if (await _userManager.IsInRoleAsync(user.Id, "Secretary"))
                     {
-                        RedirectToAction("Index", "Home", new { area = "Secretary" });
+                        return RedirectToAction("Index", "Home", new { area = "Secretary" });
                     }
-                    if (!user.ManagerConfirmed)
+                    if (await _userManager.IsInRoleAsync(user.Id, "Employee"))
                     {
-                        ModelState.AddModelError(string.Empty, "Please wait for manager confirmation");
-                        return View(model);
+                        return RedirectToAction("Index", "Home", new { area = "Employee" });
+                    }
+                    if (await _userManager.IsInRoleAsync(user.Id, "Driver"))
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Driver" });
                     }
                     return RedirectToLocal(returnUrl);
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.Failure:
@@ -154,7 +133,7 @@ namespace Vehicle.Client.Controllers
             if (!ModelState.IsValid) return View(model);
 
 
-            var email = await UserManager.FindByEmailAsync(model.Email);
+            var email = await _userManager.FindByEmailAsync(model.Email);
             if (email != null)
             {
                 ModelState.AddModelError(string.Empty, "Email already exists!");
@@ -167,7 +146,7 @@ namespace Vehicle.Client.Controllers
                 Email = model.Email,
                 PhoneNumber = model.Phone
             };
-            var result = await UserManager.CreateAsync(newUser, model.Password);
+            var result = await _userManager.CreateAsync(newUser, model.Password);
 
             if (!result.Succeeded)
             {
@@ -178,25 +157,30 @@ namespace Vehicle.Client.Controllers
                 }
             }
 
-            var user = await UserManager.FindByEmailAsync(model.Email);
+            var user = await _userManager.FindByEmailAsync(model.Email);
 
-            if (!await RoleManager.RoleExistsAsync(UserRolesVm.Manager))
-                await RoleManager.CreateAsync(new IdentityRole() { Name = UserRolesVm.Manager });
 
-            if (!await RoleManager.RoleExistsAsync(UserRolesVm.Employee))
-                await RoleManager.CreateAsync(new IdentityRole() { Name = UserRolesVm.Employee });
+            if (!await _roleManager.RoleExistsAsync(UserRolesVm.Manager))
+                await _roleManager.CreateAsync(new IdentityRole() { Name = UserRolesVm.Manager });
 
-            if (!await RoleManager.RoleExistsAsync(UserRolesVm.Secretary))
-                await RoleManager.CreateAsync(new IdentityRole() { Name = UserRolesVm.Secretary });
+            if (!await _roleManager.RoleExistsAsync(UserRolesVm.Employee))
+                await _roleManager.CreateAsync(new IdentityRole() { Name = UserRolesVm.Employee });
 
-            if (await RoleManager.RoleExistsAsync(UserRolesVm.Manager))
-                await UserManager.AddToRoleAsync(user.Id, UserRolesVm.Manager);
+            if (!await _roleManager.RoleExistsAsync(UserRolesVm.Secretary))
+                await _roleManager.CreateAsync(new IdentityRole() { Name = UserRolesVm.Secretary });
+
+            if (!await _roleManager.RoleExistsAsync(UserRolesVm.Driver))
+                await _roleManager.CreateAsync(new IdentityRole() { Name = UserRolesVm.Driver });
+
+            if (await _roleManager.RoleExistsAsync(UserRolesVm.Driver))
+                await _userManager.AddToRoleAsync(user.Id, UserRolesVm.Driver);
 
             // Send Email Confirmation Code
-            //var code = await UserManager.GenerateChangePhoneNumberTokenAsync(user.Id, user.Email);
+            //var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user.Id, user.Email);
             //await _emailService.SendEmailAsync(new EmailModel(user.Email, "Email confirmation", "Your security code is" + code));
 
-            return RedirectToAction("ConfirmEmailCode", new { email = model.Email });
+            //return RedirectToAction("ConfirmEmailCode", new { email = model.Email });
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
 
         [AllowAnonymous]
@@ -213,7 +197,7 @@ namespace Vehicle.Client.Controllers
             if (!ModelState.IsValid) return View(model);
 
             // Send Email Confirmation Code
-            var user = await UserManager.FindByEmailAsync(model.Email);
+            var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "User not found");
@@ -224,7 +208,7 @@ namespace Vehicle.Client.Controllers
                 ModelState.AddModelError(string.Empty, "User email confirmed before");
                 return View(model);
             }
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(user.Id, user.Email);
+            var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user.Id, user.Email);
             await _emailService.SendEmailAsync(new EmailModel(user.Email, "Email confirmation", "Your security code is" + code));
             return RedirectToAction("Login");
         }
@@ -251,14 +235,14 @@ namespace Vehicle.Client.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var user = UserManager.Users.SingleOrDefault(u => u.Email == model.Email);
+            var user = _userManager.Users.SingleOrDefault(u => u.Email == model.Email);
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "User not found!");
                 return View();
             }
 
-            var result = await UserManager.ChangePhoneNumberAsync(user.Id, model.Email, model.Code);
+            var result = await _userManager.ChangePhoneNumberAsync(user.Id, model.Email, model.Code);
             if (!result.Succeeded)
             {
                 ModelState.AddModelError(string.Empty, "Code is not valid");
@@ -267,7 +251,7 @@ namespace Vehicle.Client.Controllers
 
             user.EmailConfirmed = true;
             user.PhoneNumberConfirmed = false;
-            await UserManager.UpdateAsync(user);
+            await _userManager.UpdateAsync(user);
 
             return RedirectToAction("Login");
         }
@@ -290,20 +274,20 @@ namespace Vehicle.Client.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await _userManager.FindByNameAsync(model.Email);
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "User not found");
                 return View();
             }
-            if (!(await UserManager.IsEmailConfirmedAsync(user.Id)))
+            if (!(await _userManager.IsEmailConfirmedAsync(user.Id)))
             {
                 ModelState.AddModelError(string.Empty, "Please confirm your email");
                 return View();
             }
 
             // Send an email with this link
-            string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+            string code = await _userManager.GeneratePasswordResetTokenAsync(user.Id);
             var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
             await _emailService.SendEmailAsync(new EmailModel(user.Email, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>"));
             return RedirectToAction("ForgotPasswordConfirmation", "Account");
@@ -333,11 +317,11 @@ namespace Vehicle.Client.Controllers
             if (!ModelState.IsValid) return View(model);
 
 
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await _userManager.FindByNameAsync(model.Email);
             if (user == null) return RedirectToAction("ResetPasswordConfirmation", "Account");
 
 
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            var result = await _userManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded) return RedirectToAction("Login", "Account");
 
             AddErrors(result);
@@ -365,7 +349,7 @@ namespace Vehicle.Client.Controllers
             }
 
             // Sign in the user with this external login provider if the user already has a login
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            var result = await _signInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -400,13 +384,13 @@ namespace Vehicle.Client.Controllers
                     return View("ExternalLoginFailure");
                 }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user);
+                var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    result = await _userManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToLocal(returnUrl);
                     }
                 }

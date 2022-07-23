@@ -7,13 +7,13 @@ namespace Vehicle.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class RemoveUserRefreshTokenTbl : IMigrationMetadata
+    public sealed partial class AddDb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RemoveUserRefreshTokenTbl));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddDb));
         
         string IMigrationMetadata.Id
         {
-            get { return "202207131203421_RemoveUserRefreshTokenTbl"; }
+            get { return "202207200437575_AddDb"; }
         }
         
         string IMigrationMetadata.Source

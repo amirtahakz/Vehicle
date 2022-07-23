@@ -82,13 +82,16 @@
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Example.cs" />
-    <Compile Include="Migrations\202207131203421_RemoveUserRefreshTokenTbl.cs" />
-    <Compile Include="Migrations\202207131203421_RemoveUserRefreshTokenTbl.designer.cs">
-      <DependentUpon>202207131203421_RemoveUserRefreshTokenTbl.cs</DependentUpon>
+    <Compile Include="Entities\Vehicle.cs" />
+    <Compile Include="Entities\VehicleRequest.cs" />
+    <Compile Include="Entities\VehicleRequestConfirmed.cs" />
+    <Compile Include="Migrations\202207200437575_AddDb.cs" />
+    <Compile Include="Migrations\202207200437575_AddDb.designer.cs">
+      <DependentUpon>202207200437575_AddDb.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207131217087_EditApplicationUser.cs" />
-    <Compile Include="Migrations\202207131217087_EditApplicationUser.designer.cs">
-      <DependentUpon>202207131217087_EditApplicationUser.cs</DependentUpon>
+    <Compile Include="Migrations\202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.cs" />
+    <Compile Include="Migrations\202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.designer.cs">
+      <DependentUpon>202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,11 +101,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202207131203421_RemoveUserRefreshTokenTbl.resx">
-      <DependentUpon>202207131203421_RemoveUserRefreshTokenTbl.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207200437575_AddDb.resx">
+      <DependentUpon>202207200437575_AddDb.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207131217087_EditApplicationUser.resx">
-      <DependentUpon>202207131217087_EditApplicationUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.resx">
+      <DependentUpon>202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

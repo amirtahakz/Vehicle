@@ -182,11 +182,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Areas\Driver\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Driver\DriverAreaRegistration.cs" />
     <Compile Include="Areas\Employee\Controllers\HomeController.cs" />
     <Compile Include="Areas\Employee\EmployeeAreaRegistration.cs" />
     <Compile Include="Areas\Manager\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Manager\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Manager\Controllers\UserController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
+    <Compile Include="Areas\Manager\Models\RoleViewModels.cs" />
+    <Compile Include="Areas\Manager\Models\UserViewModels.cs" />
     <Compile Include="Areas\Secretary\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Secretary\Controllers\VehicleController.cs" />
+    <Compile Include="Areas\Secretary\Models\VehicleViewModels.cs" />
     <Compile Include="Areas\Secretary\SecretaryAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -216,11 +224,20 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Custom\Global\Styles.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Style.css" />
+    <Content Include="Data\Images\1.jpg" />
+    <Content Include="Data\Images\10.jpg" />
+    <Content Include="Data\Images\11.jpg" />
+    <Content Include="Data\Images\12.jpg" />
+    <Content Include="Data\Images\2.jpg" />
+    <Content Include="Data\Images\3.jpg" />
+    <Content Include="Data\Images\menu.png" />
+    <Content Include="Data\Images\undraw_educator_re_ju47.svg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Images\test.jpg" />
+    <Content Include="Data\Images\test.jpg" />
     <Content Include="libman.json" />
     <Content Include="Areas\Manager\Views\web.config" />
     <Content Include="Areas\Manager\Views\_ViewStart.cshtml" />
@@ -262,7 +279,23 @@
     <Content Include="Areas\Employee\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Employee\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Employee\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Manager\Views\User\NotConfirmedUsers.cshtml" />
+    <Content Include="Areas\Manager\Views\User\Users.cshtml" />
+    <Content Include="Areas\Manager\Views\Role\Roles.cshtml" />
+    <Content Include="Areas\Driver\Views\web.config" />
+    <Content Include="Areas\Driver\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Driver\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Driver\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Secretary\Views\Vehicle\Vehicles.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\Custom\Driver\DriverScripts.js" />
+    <Content Include="Scripts\Custom\Driver\DriverServices.js" />
+    <Content Include="Scripts\Custom\Employee\EmployeeScripts.js" />
+    <Content Include="Scripts\Custom\Employee\EmployeeServices.js" />
+    <Content Include="Scripts\Custom\Manager\ManagerScripts.js" />
+    <Content Include="Scripts\Custom\Manager\ManagerServices.js" />
+    <Content Include="Scripts\Custom\Secretary\SecretaryScripts.js" />
+    <Content Include="Scripts\Custom\Secretary\SecretaryServices.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.js" />
@@ -305,6 +338,20 @@
     <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Driver\Data\" />
+    <Folder Include="Areas\Employee\Data\" />
+    <Folder Include="Areas\Manager\Data\" />
+    <Folder Include="Areas\Secretary\Data\" />
+    <Folder Include="Content\Custom\Driver\" />
+    <Folder Include="Content\Custom\Employee\" />
+    <Folder Include="Content\Custom\Manager\" />
+    <Folder Include="Content\Custom\Secretary\" />
+    <Folder Include="Scripts\Custom\Global\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Vehicle.Core\Vehicle.Core.csproj">
       <Project>{9e849a01-66ef-4cbe-bd1c-4ae990ce7f5f}</Project>
       <Name>Vehicle.Core</Name>
@@ -313,14 +360,6 @@
       <Project>{9d8fc949-eaea-4a17-8f54-225227fe614d}</Project>
       <Name>Vehicle.Data</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Employee\Data\" />
-    <Folder Include="Areas\Manager\Data\" />
-    <Folder Include="Areas\Secretary\Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
