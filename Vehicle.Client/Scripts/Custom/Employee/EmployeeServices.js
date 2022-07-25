@@ -85,6 +85,8 @@ $('#vehicle-request-confirmeds-tbl-employee').ready(function () {
                       <td> ${valueOfElement.Origin} </td>
                       <td> ${valueOfElement.Destination} </td>
                       <td> ${valueOfElement.Description} </td>
+                      <td> ${valueOfElement.SecretaryConfirmed} </td>
+                      <td> ${valueOfElement.DriverConfirmed} </td>
                    </tr>
                        `);
             });
