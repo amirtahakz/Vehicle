@@ -129,7 +129,6 @@ namespace Vehicle.Core.Services
             try
             {
                 var res = _dbset.Attach(entity);
-                entity.IsRemove = false;
                 _context.Entry(entity).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
                 return res;

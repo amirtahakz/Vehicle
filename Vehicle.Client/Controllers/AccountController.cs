@@ -26,12 +26,10 @@ namespace Vehicle.Client.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
-        private readonly IExampleService _exampleService;
         private readonly IEmailService _emailService;
 
-        public AccountController(IExampleService exampleService, IEmailService emailService)
+        public AccountController(IEmailService emailService)
         {
-            _exampleService = exampleService;
             _emailService = emailService;
         }
 
@@ -402,8 +400,6 @@ namespace Vehicle.Client.Controllers
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult LogOut()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

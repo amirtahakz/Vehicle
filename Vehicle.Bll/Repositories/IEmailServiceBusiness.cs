@@ -4,16 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vehicle.Core.Repositories
+namespace Vehicle.Bll.Repositories
 {
-    public interface IExampleService
+    public interface IEmailServiceBusiness
     {
-
-        #region IMethods
-
-
-
-        #endregion
-
     }
 }

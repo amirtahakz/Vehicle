@@ -13,7 +13,7 @@ namespace Vehicle.Data.Entities
         #region Properties
 
         [Key]
-        public Guid Id { get; protected set; }
+        public Guid Id { get; protected set; } = Guid.NewGuid();
 
         [Required(ErrorMessage = "{0} is required.")]
         public DateTime DateCreated { get; set; } = DateTime.Now;

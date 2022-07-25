@@ -4,19 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Vehicle.Bll.Repositories;
 using Vehicle.Client.Areas.Secretary.Models;
+using Vehicle.Client.Models;
 using Vehicle.Core.Repositories;
 
 namespace Vehicle.Client.Areas.Secretary.Controllers
 {
+    [Authorize(Roles = UserRolesVm.Secretary)]
     public class VehicleController : Controller
     {
         #region Connections
 
-        private readonly IVehicleService _vehicleService;
-        public VehicleController(IVehicleService vehicleService)
+        private readonly IVehicleServiceBusiness _vehicleServiceBusiness;
+        public VehicleController(IVehicleServiceBusiness vehicleServiceBusiness)
         {
-            _vehicleService = vehicleService;
+            _vehicleServiceBusiness = vehicleServiceBusiness;
         }
 
         #endregion
@@ -32,7 +35,7 @@ namespace Vehicle.Client.Areas.Secretary.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            await _vehicleService.AddVehicleAsync(new Data.Entities.Vehicle()
+            await _vehicleServiceBusiness.AddVehicleAsync(new Data.Entities.Vehicle()
             {
                 CarTag = model.CarTag,
                 Color = model.Color,
@@ -44,7 +47,7 @@ namespace Vehicle.Client.Areas.Secretary.Controllers
 
         public JsonResult GetVehicles()
         {
-            var result = _vehicleService.GetVehicles();
+            var result = _vehicleServiceBusiness.GetVehicles();
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

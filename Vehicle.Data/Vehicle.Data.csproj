@@ -93,6 +93,10 @@
     <Compile Include="Migrations\202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.designer.cs">
       <DependentUpon>202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207240928023_EditVehicleRequestConfirmedTbl.cs" />
+    <Compile Include="Migrations\202207240928023_EditVehicleRequestConfirmedTbl.designer.cs">
+      <DependentUpon>202207240928023_EditVehicleRequestConfirmedTbl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -106,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.resx">
       <DependentUpon>202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207240928023_EditVehicleRequestConfirmedTbl.resx">
+      <DependentUpon>202207240928023_EditVehicleRequestConfirmedTbl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

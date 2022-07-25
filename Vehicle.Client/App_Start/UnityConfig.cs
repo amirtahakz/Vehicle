@@ -13,6 +13,8 @@ using Microsoft.Owin.Security;
 using System.Web;
 using Vehicle.Data.Context;
 using Unity.Lifetime;
+using Vehicle.Bll.Services;
+using Vehicle.Bll.Repositories;
 
 namespace Vehicle.Client
 {
@@ -26,11 +28,26 @@ namespace Vehicle.Client
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();
+
+            #region Business
+
+            container.RegisterType<IEmailServiceBusiness, EmailServiceBusiness>();
+            container.RegisterType<IVehicleServiceBusiness, VehicleServiceBusiness>();
+            container.RegisterType<IVehicleRequestServiceBusiness, VehicleRequestServiceBusiness>();
+            container.RegisterType<IVehicleRequestConfirmedServiceBusiness, VehicleRequestConfirmedServiceBusiness>();
+
+            #endregion
+
+            #region Services
+
             container.RegisterType<Vehicle.Core.Repositories.IEmailService, Vehicle.Core.Services.EmailService>();
-            container.RegisterType<IExampleService, ExampleService>();
             container.RegisterType<IVehicleService, VehicleService>();
             container.RegisterType<IVehicleRequestService, VehicleRequestService>();
             container.RegisterType<IVehicleRequestConfirmedService, VehicleRequestConfirmedService>();
+
+            #endregion
+
+            #region Identity
 
             container.RegisterType<ApplicationSignInManager>();
             container.RegisterType<ApplicationUserManager>();
@@ -43,8 +60,7 @@ namespace Vehicle.Client
             new InjectionConstructor(typeof(ApplicationDbContext)));
             container.RegisterType<IRoleStore<IdentityRole, string>, RoleStore<IdentityRole>>(new InjectionConstructor(new ApplicationDbContext()));
 
-
-
+            #endregion
 
 
 

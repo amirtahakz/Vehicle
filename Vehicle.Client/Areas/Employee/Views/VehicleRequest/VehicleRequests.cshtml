@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "VehicleRequests";
+}
+
+<div class="mt-5 col-11" style="height:100%">
+    <p class="h1">مدیریت درخواست های وسیله نقلیه</p>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVehicleRequestModal">
+        درخواست وسیله نقلیه
+    </button>
+    <!-- Button trigger modal -->
+    <table class="table table-striped table-hover" id="vehicle-requests-tbl-employee">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ای دی کارمند</th>
+                <th scope="col">ای دی ماشین</th>
+                <th scope="col">مبدا</th>
+                <th scope="col">مقصد</th>
+                <th scope="col">توضیحات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*data will apear*@
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addVehicleRequestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">درخواست وسیله نقلیه</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">مبدا</label>
+                        <input type="text" class="form-control" id="origin">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">مقصد</label>
+                        <input type="text" class="form-control" id="destination">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">توضیحات</label>
+                        <input type="text" class="form-control" id="description">
+                    </div>
+                    <div class="mb-3">
+                        <label for="vehicles-select-list">وسیله نقلیه</label>
+                        <select class="form-control" id="vehicles-select-list">
+                            @*data will apear*@
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="add-vehicle-request-btn">افزودن</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->

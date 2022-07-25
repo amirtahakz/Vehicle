@@ -10,6 +10,7 @@ namespace Vehicle.Data.Entities
     public class VehicleRequestConfirmed : BaseEntity
     {
         public string DriverId { get; set; }
+        public string SecretarytId { get; set; }
         public Guid VehicleRequestId { get; set; }
 
 
@@ -21,6 +22,9 @@ namespace Vehicle.Data.Entities
 
         [ForeignKey("VehicleRequestId")]
         public VehicleRequest VehicleRequest { get; set; }
+
+        [ForeignKey("SecretarytId")]
+        public ApplicationUser Secretary { get; set; }
 
         #endregion
     }

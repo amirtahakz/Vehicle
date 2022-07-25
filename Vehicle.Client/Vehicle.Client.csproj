@@ -183,9 +183,16 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Areas\Driver\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Driver\Controllers\VehicleRequestConfirmedController.cs" />
+    <Compile Include="Areas\Driver\Controllers\VehicleRequestController.cs" />
     <Compile Include="Areas\Driver\DriverAreaRegistration.cs" />
+    <Compile Include="Areas\Driver\Models\VehicleRequestConfirmedViewModels.cs" />
+    <Compile Include="Areas\Driver\Models\VehicleRequestViewModels.cs" />
     <Compile Include="Areas\Employee\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Employee\Controllers\VehicleController.cs" />
+    <Compile Include="Areas\Employee\Controllers\VehicleRequestController.cs" />
     <Compile Include="Areas\Employee\EmployeeAreaRegistration.cs" />
+    <Compile Include="Areas\Employee\Models\VehicleRequestViewModels.cs" />
     <Compile Include="Areas\Manager\Controllers\HomeController.cs" />
     <Compile Include="Areas\Manager\Controllers\RoleController.cs" />
     <Compile Include="Areas\Manager\Controllers\UserController.cs" />
@@ -194,6 +201,10 @@
     <Compile Include="Areas\Manager\Models\UserViewModels.cs" />
     <Compile Include="Areas\Secretary\Controllers\HomeController.cs" />
     <Compile Include="Areas\Secretary\Controllers\VehicleController.cs" />
+    <Compile Include="Areas\Secretary\Controllers\VehicleRequestConfirmedController.cs" />
+    <Compile Include="Areas\Secretary\Controllers\VehicleRequestController.cs" />
+    <Compile Include="Areas\Secretary\Models\VehicleRequestConfirmedViewModels.cs" />
+    <Compile Include="Areas\Secretary\Models\VehicleRequestViewModels.cs" />
     <Compile Include="Areas\Secretary\Models\VehicleViewModels.cs" />
     <Compile Include="Areas\Secretary\SecretaryAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -228,11 +239,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\Style.css" />
     <Content Include="Data\Images\1.jpg" />
-    <Content Include="Data\Images\10.jpg" />
-    <Content Include="Data\Images\11.jpg" />
-    <Content Include="Data\Images\12.jpg" />
+    <Content Include="Data\Images\4.jpg" />
+    <Content Include="Data\Images\5.jpg" />
+    <Content Include="Data\Images\6.jpg" />
     <Content Include="Data\Images\2.jpg" />
     <Content Include="Data\Images\3.jpg" />
+    <Content Include="Data\Images\dashboard.png" />
+    <Content Include="Data\Images\dashboardBlack.png" />
     <Content Include="Data\Images\menu.png" />
     <Content Include="Data\Images\undraw_educator_re_ju47.svg" />
     <Content Include="favicon.ico" />
@@ -287,6 +300,13 @@
     <Content Include="Areas\Driver\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Driver\Views\Home\Index.cshtml" />
     <Content Include="Areas\Secretary\Views\Vehicle\Vehicles.cshtml" />
+    <Content Include="Areas\Employee\Views\VehicleRequest\VehicleRequests.cshtml" />
+    <Content Include="Areas\Employee\Views\VehicleRequest\VehicleRequestConfirmeds.cshtml" />
+    <Content Include="Areas\Secretary\Views\VehicleRequest\VehicleRequestNotConfirmeds.cshtml" />
+    <Content Include="Areas\Secretary\Views\VehicleRequestConfirmed\VehicleRequestConfirmeds.cshtml" />
+    <Content Include="Areas\Driver\Views\VehicleRequest\VehicleRequestNotConfirmeds.cshtml" />
+    <Content Include="Areas\Driver\Views\VehicleRequestConfirmed\VehicleRequestConfirmeds.cshtml" />
+    <Content Include="Data\Fonts\B Ziba_0.ttf" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\Custom\Driver\DriverScripts.js" />
     <Content Include="Scripts\Custom\Driver\DriverServices.js" />
@@ -343,6 +363,7 @@
   <ItemGroup>
     <Folder Include="Areas\Driver\Data\" />
     <Folder Include="Areas\Employee\Data\" />
+    <Folder Include="Areas\Employee\Views\Vehicle\" />
     <Folder Include="Areas\Manager\Data\" />
     <Folder Include="Areas\Secretary\Data\" />
     <Folder Include="Content\Custom\Driver\" />
@@ -352,6 +373,10 @@
     <Folder Include="Scripts\Custom\Global\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Vehicle.Bll\Vehicle.Bll.csproj">
+      <Project>{4a3de0d1-0de2-459c-ac57-c06aac03e434}</Project>
+      <Name>Vehicle.Bll</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Vehicle.Core\Vehicle.Core.csproj">
       <Project>{9e849a01-66ef-4cbe-bd1c-4ae990ce7f5f}</Project>
       <Name>Vehicle.Core</Name>
