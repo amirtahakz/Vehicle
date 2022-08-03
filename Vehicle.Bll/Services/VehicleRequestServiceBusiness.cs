@@ -23,40 +23,26 @@ namespace Vehicle.Bll.Services
 
         #region Methods
 
-        public async Task AddVehicleRequestAsync(VehicleRequest model)
+        public async Task<VehicleRequest> AddVehicleRequestAsync(VehicleRequest model)
         {
-            await _vehicleRequestService.AddVehicleRequestAsync(model);
+            return await _vehicleRequestService.AddVehicleRequestAsync(model);
         }
 
-        public ICollection<VehicleRequest> GetVehicleRequests()
-        {
-            return _vehicleRequestService.GetVehicleRequests();
-        }
+        //public async Task ConfirmVehicleRequestAsync(Guid id)
+        //{
+        //    await _vehicleRequestService.ConfirmVehicleRequestAsync(id);
+        //}
 
-        public ICollection<VehicleRequest> GetVehicleRequestConfirmedsByEmplyeeId(string id)
-        {
-            return _vehicleRequestService.GetVehicleRequestConfirmedsByEmplyeeId(id);
-        }
+        //public ICollection<VehicleRequest> GetVehicleRequestsByUserId(string userId)
+        //{
+        //    return _vehicleRequestService.GetVehicleRequestsByUserId(userId);
+        //}
 
-        public ICollection<VehicleRequest> GetVehicleRequestNotConfirmedsBySecretary()
-        {
-            return _vehicleRequestService.GetVehicleRequestNotConfirmedsBySecretary();
-        }
+        //public ICollection<VehicleRequest> GetVehicleRequestsNotConfirmed()
+        //{
+        //    return _vehicleRequestService.GetVehicleRequestsNotConfirmed();
+        //}
 
-        public ICollection<VehicleRequest> GetVehicleRequestNotConfirmedsByDriver()
-        {
-            return _vehicleRequestService.GetVehicleRequestNotConfirmedsByDriver();
-        }
-
-        public async Task UpdateVehicleRequestAsync(VehicleRequest model)
-        {
-            await _vehicleRequestService.UpdateVehicleRequestAsync(model);
-        }
-
-        public async Task<VehicleRequest> GetVehicleRequestByIdAsync(Guid Id)
-        {
-            return await _vehicleRequestService.GetVehicleRequestByIdAsync(Id);
-        }
 
 
         #endregion

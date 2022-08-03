@@ -25,6 +25,7 @@ namespace Vehicle.Data.Context
 
         public DbSet<Entities.Vehicle> Vehicles { get; set; }
         public DbSet<VehicleRequest> VehicleRequests { get; set; }
-        public DbSet<VehicleRequestConfirmed> VehicleRequestConfirmeds { get; set; }
+        public DbSet<Confirmation> Confirmations { get; set; }
+        public DbSet<ConfirmationsUsersWhoConfirmed> ConfirmationsUsersWhoConfirmeds { get; set; }
     }
 }

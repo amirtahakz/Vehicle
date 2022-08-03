@@ -1,19 +1,24 @@
-﻿$('#vehicle-requests-tbl-employee').ready(function () {
+﻿$('#confirmations-tbl-employee').ready(function () {
+    var EmployeeId = document.getElementById("employee-id-layout").value;
+    var data0 = {
+        EmployeeId: EmployeeId
+    }
     $.ajax({
-        type: "GET",
-        url: "https://localhost:44305/Employee/VehicleRequest/GetVehicleRequests",
+        type: "POST",
+        url: "https://localhost:44305/Employee/Confirmation/GetConfirmations",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        data: JSON.stringify(data0),
         success: function (response) {
             $.each(response, function (indexInArray, valueOfElement) {
-                $('#vehicle-requests-tbl-employee > tbody:last-child').append(`
+                $('#confirmations-tbl-employee > tbody:last-child').append(`
                    <tr>
                       <th scope="row"> ${indexInArray} </th>
-                      <td> ${valueOfElement.EmployeeId} </td>
-                      <td> ${valueOfElement.VehicleId} </td>
-                      <td> ${valueOfElement.Origin} </td>
-                      <td> ${valueOfElement.Destination} </td>
-                      <td> ${valueOfElement.Description} </td>
+                      <td> ${valueOfElement.VehicleRequest.Origin} </td>
+                      <td> ${valueOfElement.VehicleRequest.Destination} </td>
+                      <td> ${valueOfElement.VehicleRequest.Description} </td>
+                      <td> ${valueOfElement.VehicleRequest.Vehicle.Name} </td>
+                      <td> ${valueOfElement.FinalIsConfirmed} </td>
                    </tr>
                        `);
             });
@@ -64,34 +69,5 @@ $('#vehicles-select-list').ready(function () {
 });
 
 
-
-$('#vehicle-request-confirmeds-tbl-employee').ready(function () {
-    var EmployeeId = document.getElementById("employee-id-layout").value;
-    var data0 = {
-        EmployeeId: EmployeeId,
-    }
-    $.ajax({
-        type: "POST",
-        url: "https://localhost:44305/Employee/VehicleRequest/GetVehicleRequestConfirmedsByEmplyeeId",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify(data0),
-        success: function (response) {
-            $.each(response, function (indexInArray, valueOfElement) {
-                $('#vehicle-request-confirmeds-tbl-employee > tbody:last-child').append(`
-                   <tr>
-                      <th scope="row"> ${indexInArray} </th>
-                      <td> ${valueOfElement.VehicleId} </td>
-                      <td> ${valueOfElement.Origin} </td>
-                      <td> ${valueOfElement.Destination} </td>
-                      <td> ${valueOfElement.Description} </td>
-                      <td> ${valueOfElement.SecretaryConfirmed} </td>
-                      <td> ${valueOfElement.DriverConfirmed} </td>
-                   </tr>
-                       `);
-            });
-        }
-    });
-});
 
 

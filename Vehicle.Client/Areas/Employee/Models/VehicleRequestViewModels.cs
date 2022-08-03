@@ -16,8 +16,4 @@ namespace Vehicle.Client.Areas.Employee.Models
         public bool DriverConfirmed { get; set; }
     }
 
-    public class GetVehicleRequestConfirmedsByEmplyeeIdVm
-    {
-        public string EmployeeId { get; set; }
-    }
 }

@@ -5,8 +5,4 @@ using System.Web;
 
 namespace Vehicle.Client.Areas.Driver.Models
 {
-    public class GetVehicleRequestConfirmedsBySecretaryIdVm
-    {
-        public string DriverId { get; set; }
-    }
 }

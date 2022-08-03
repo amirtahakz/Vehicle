@@ -21,40 +21,11 @@ namespace Vehicle.Core.Services
 
         #region Methods
 
-        public async Task AddVehicleRequestAsync(VehicleRequest model)
+        public async Task<VehicleRequest> AddVehicleRequestAsync(VehicleRequest model)
         {
-            await AddAsync(model);
+            return await AddAsync(model);
         }
 
-        public ICollection<VehicleRequest> GetVehicleRequests()
-        {
-            return Table().ToList();
-        }
-
-        public ICollection<VehicleRequest> GetVehicleRequestConfirmedsByEmplyeeId(string id)
-        {
-            return Table().Where(x=> x.SecretaryConfirmed).Where(x=>x.DriverConfirmed).Where(x=> x.EmployeeId == id.ToString()).ToList();
-        }
-
-        public ICollection<VehicleRequest> GetVehicleRequestNotConfirmedsBySecretary()
-        {
-            return Table().Where(x => !x.SecretaryConfirmed).ToList();
-        }
-
-        public ICollection<VehicleRequest> GetVehicleRequestNotConfirmedsByDriver()
-        {
-            return Table().Where(x => !x.DriverConfirmed).Where(x => x.SecretaryConfirmed).ToList();
-        }
-
-        public async Task UpdateVehicleRequestAsync(VehicleRequest model)
-        {
-            await UpdateAsync(model);
-        }
-
-        public async Task<VehicleRequest> GetVehicleRequestByIdAsync(Guid Id)
-        {
-            return await GetByIdAsync(Id);
-        }
 
 
         #endregion

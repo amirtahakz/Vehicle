@@ -170,10 +170,10 @@ namespace Vehicle.Client.Controllers
             if (!await _roleManager.RoleExistsAsync(UserRolesVm.Driver))
                 await _roleManager.CreateAsync(new IdentityRole() { Name = UserRolesVm.Driver });
 
-            if (await _roleManager.RoleExistsAsync(UserRolesVm.Driver))
-                await _userManager.AddToRoleAsync(user.Id, UserRolesVm.Driver);
+            if (await _roleManager.RoleExistsAsync(UserRolesVm.Employee))
+                await _userManager.AddToRoleAsync(user.Id, UserRolesVm.Employee);
 
-            // Send Email Confirmation Code
+            // Send Email ConfirmationService Code
             //var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user.Id, user.Email);
             //await _emailService.SendEmailAsync(new EmailModel(user.Email, "Email confirmation", "Your security code is" + code));
 
@@ -194,7 +194,7 @@ namespace Vehicle.Client.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            // Send Email Confirmation Code
+            // Send Email ConfirmationService Code
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {

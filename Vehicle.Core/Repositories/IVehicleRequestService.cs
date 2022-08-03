@@ -11,20 +11,8 @@ namespace Vehicle.Core.Repositories
     {
         #region IMethods
 
-        Task AddVehicleRequestAsync(VehicleRequest model);
+        Task<VehicleRequest> AddVehicleRequestAsync(VehicleRequest model);
 
-        ICollection<VehicleRequest> GetVehicleRequests();
-
-        ICollection<VehicleRequest> GetVehicleRequestConfirmedsByEmplyeeId(string id);
-
-        ICollection<VehicleRequest> GetVehicleRequestNotConfirmedsBySecretary();
-
-        ICollection<VehicleRequest> GetVehicleRequestNotConfirmedsByDriver();
-
-
-        Task UpdateVehicleRequestAsync(VehicleRequest model);
-
-        Task<VehicleRequest> GetVehicleRequestByIdAsync(Guid Id);
 
         #endregion
     }

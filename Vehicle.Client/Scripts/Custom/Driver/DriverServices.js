@@ -1,24 +1,24 @@
-﻿$('#vehicle-request-not-confirmeds-tbl-driver').ready(function () {
+﻿$('#confirmations-not-confirmed-tbl-driver').ready(function () {
     $.ajax({
         type: "GET",
-        url: "https://localhost:44305/Driver/VehicleRequest/GetVehicleRequestNotConfirmeds",
+        url: "https://localhost:44305/Driver/Confirmation/GetConfirmationsNotConfirmedByDriver",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
             $.each(response, function (indexInArray, valueOfElement) {
-                $('#vehicle-request-not-confirmeds-tbl-driver > tbody:last-child').append(`
+                $('#confirmations-not-confirmed-tbl-driver > tbody:last-child').append(`
                            <tr>
                               <th scope="row"> ${indexInArray} </th>
-                              <td> ${valueOfElement.EmployeeId} </td>
-                              <td> ${valueOfElement.VehicleId} </td>
-                              <td> ${valueOfElement.Origin} </td>
-                              <td> ${valueOfElement.Destination} </td>
-                              <td> ${valueOfElement.Description} </td>
+                              <th scope="row"> ${indexInArray} </th>
+                              <td> ${valueOfElement.VehicleRequest.Origin} </td>
+                              <td> ${valueOfElement.VehicleRequest.Destination} </td>
+                              <td> ${valueOfElement.VehicleRequest.Description} </td>
+                              <td> ${valueOfElement.VehicleRequest.Vehicle.Name} </td>
                               <td>
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updataUserModal" id="confirm-vehicle-request-driver-btn">تایید</button>
-                              </td> 
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updataUserModal" id="confirm-confirmation-btn">تایید</button>
+                              </td>
                               <td>
-                                <input type="hidden" id="vehicle-request-not-confirmed-id" value="${valueOfElement.Id}"/>
+                                <input type="hidden" id="confirmation-id" value="${valueOfElement.Id}"/>
                               </td>
                            </tr>
                                `);
@@ -27,16 +27,16 @@
     });
 });
 
-$(document).on("click", '#confirm-vehicle-request-driver-btn', function () {
-    var VehicleRequestId = document.getElementById("vehicle-request-not-confirmed-id").value;
+$(document).on("click", '#confirm-confirmation-btn', function () {
+    var ConfirmationId = document.getElementById("confirmation-id").value;
     var DriverId = document.getElementById("driver-id-layout").value;
     var data0 = {
-        VehicleRequestId: VehicleRequestId,
+        ConfirmationId: ConfirmationId,
         DriverId: DriverId,
     };
     $.ajax({
         type: "POST",
-        url: "https://localhost:44305/Driver/VehicleRequest/ConfirmVehicleRequest",
+        url: "https://localhost:44305/Driver/Confirmation/ConfirmConfirmation",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(data0),
@@ -49,24 +49,27 @@ $(document).on("click", '#confirm-vehicle-request-driver-btn', function () {
 
 
 
-$('#vehicle-request-confirmeds-by-driver-tbl-driver').ready(function () {
+$('#confirmation-confirmed-by-driver-tbl-driver').ready(function () {
     var DriverId = document.getElementById("driver-id-layout").value;
     var data0 = {
         DriverId: DriverId,
     };
     $.ajax({
         type: "POST",
-        url: "https://localhost:44305/Driver/VehicleRequestConfirmed/GetVehicleRequestConfirmedsBySecretaryId",
+        url: "https://localhost:44305/Driver/ConfirmationsUsersWhoConfirmed/GetConfirmationsConfirmedByDriver",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(data0),
         success: function (response) {
             $.each(response, function (indexInArray, valueOfElement) {
                 console.log(valueOfElement)
-                $('#vehicle-request-confirmeds-by-driver-tbl-driver > tbody:last-child').append(`
+                $('#confirmation-confirmed-by-driver-tbl-driver > tbody:last-child').append(`
                            <tr>
-                              <th scope="row"> ${indexInArray} </th>
-                              <td> ${valueOfElement.VehicleRequestId} </td>
+                              <th scope="row"> ${indexInArray} </th>                       
+                              <td> ${valueOfElement.VehicleRequest.Origin} </td>
+                              <td> ${valueOfElement.VehicleRequest.Destination} </td>
+                              <td> ${valueOfElement.VehicleRequest.Description} </td>
+                              <td> ${valueOfElement.VehicleRequest.Vehicle.Name} </td>
                            </tr>
                                `);
             });

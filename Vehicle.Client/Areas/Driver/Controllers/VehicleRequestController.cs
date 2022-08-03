@@ -17,11 +17,9 @@ namespace Vehicle.Client.Areas.Driver.Controllers
         #region Connections
 
         private readonly IVehicleRequestServiceBusiness _vehicleRequestServiceBusiness;
-        private readonly IVehicleRequestConfirmedServiceBusiness _vehicleRequestConfirmedServiceBusiness;
-        public VehicleRequestController(IVehicleRequestServiceBusiness vehicleRequestServiceBusiness, IVehicleRequestConfirmedServiceBusiness vehicleRequestConfirmedServiceBusiness)
+        public VehicleRequestController(IVehicleRequestServiceBusiness vehicleRequestServiceBusiness)
         {
             _vehicleRequestServiceBusiness = vehicleRequestServiceBusiness;
-            _vehicleRequestConfirmedServiceBusiness = vehicleRequestConfirmedServiceBusiness;
         }
 
         #endregion
@@ -31,23 +29,11 @@ namespace Vehicle.Client.Areas.Driver.Controllers
         {
             return View();
         }
-        public JsonResult GetVehicleRequestNotConfirmeds()
-        {
-            var result = _vehicleRequestServiceBusiness.GetVehicleRequestNotConfirmedsByDriver();
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult GetVehicleRequestNotConfirmeds()
+        //{
+        //    var result = _vehicleRequestServiceBusiness.GetVehicleRequestNotConfirmedsByDriver();
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
 
-
-        public async Task ConfirmVehicleRequest(ConfirmVehicleRequestVm model)
-        {
-            var res = _vehicleRequestServiceBusiness.GetVehicleRequestByIdAsync(model.VehicleRequestId);
-            res.Result.DriverConfirmed = true;
-            await _vehicleRequestServiceBusiness.UpdateVehicleRequestAsync(await res);
-
-            var data = _vehicleRequestConfirmedServiceBusiness.GetVehicleRequestConfirmedByVehicleRequestId(res.Result.Id);
-            data.DriverId = model.DriverId;
-            await _vehicleRequestConfirmedServiceBusiness.UpdateVehicleRequestConfirmedAsync(data);
-
-        }
     }
 }

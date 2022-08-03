@@ -17,38 +17,15 @@ namespace Vehicle.Client.Areas.Secretary.Controllers
         #region Connections
 
         private readonly IVehicleRequestServiceBusiness _vehicleRequestServiceBusiness;
-        private readonly IVehicleRequestConfirmedServiceBusiness _vehicleRequestConfirmedServiceBusiness;
-        public VehicleRequestController(IVehicleRequestServiceBusiness vehicleRequestServiceBusiness, IVehicleRequestConfirmedServiceBusiness vehicleRequestConfirmedServiceBusiness)
+        public VehicleRequestController(IVehicleRequestServiceBusiness vehicleRequestServiceBusiness)
         {
             _vehicleRequestServiceBusiness = vehicleRequestServiceBusiness;
-            _vehicleRequestConfirmedServiceBusiness = vehicleRequestConfirmedServiceBusiness;
         }
 
         #endregion
 
         // GET: Secretary/VehicleRequest
-        public ActionResult VehicleRequestNotConfirmeds()
-        {
-            return View();
-        }
-        public JsonResult GetVehicleRequestNotConfirmeds()
-        {
-            var result = _vehicleRequestServiceBusiness.GetVehicleRequestNotConfirmedsBySecretary();
-            return Json(result , JsonRequestBehavior.AllowGet);
-        }
 
 
-        public async Task ConfirmVehicleRequest(ConfirmVehicleRequestVm model)
-        {
-            var res = _vehicleRequestServiceBusiness.GetVehicleRequestByIdAsync(model.VehicleRequestId);
-            res.Result.SecretaryConfirmed = true;
-            await _vehicleRequestServiceBusiness.UpdateVehicleRequestAsync(await res);
-            await _vehicleRequestConfirmedServiceBusiness.AddVehicleRequestConfirmedAsync(new VehicleRequestConfirmed()
-            {
-                SecretarytId = model.SecretaryId,
-                VehicleRequestId = res.Result.Id
-            });
-
-        }
     }
 }

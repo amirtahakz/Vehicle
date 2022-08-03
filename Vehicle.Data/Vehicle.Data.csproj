@@ -81,21 +81,50 @@
     <Compile Include="Context\ApplicationDbContext.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Confirmation.cs" />
+    <Compile Include="Entities\ConfirmationsUsersWhoConfirmed.cs" />
     <Compile Include="Entities\Example.cs" />
     <Compile Include="Entities\Vehicle.cs" />
     <Compile Include="Entities\VehicleRequest.cs" />
-    <Compile Include="Entities\VehicleRequestConfirmed.cs" />
-    <Compile Include="Migrations\202207200437575_AddDb.cs" />
-    <Compile Include="Migrations\202207200437575_AddDb.designer.cs">
-      <DependentUpon>202207200437575_AddDb.cs</DependentUpon>
+    <Compile Include="Migrations\202207311215401_AddDb.cs" />
+    <Compile Include="Migrations\202207311215401_AddDb.designer.cs">
+      <DependentUpon>202207311215401_AddDb.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.cs" />
-    <Compile Include="Migrations\202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.designer.cs">
-      <DependentUpon>202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.cs</DependentUpon>
+    <Compile Include="Migrations\202207311507277_Edit4.cs" />
+    <Compile Include="Migrations\202207311507277_Edit4.designer.cs">
+      <DependentUpon>202207311507277_Edit4.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207240928023_EditVehicleRequestConfirmedTbl.cs" />
-    <Compile Include="Migrations\202207240928023_EditVehicleRequestConfirmedTbl.designer.cs">
-      <DependentUpon>202207240928023_EditVehicleRequestConfirmedTbl.cs</DependentUpon>
+    <Compile Include="Migrations\202207311516402_Edit5.cs" />
+    <Compile Include="Migrations\202207311516402_Edit5.designer.cs">
+      <DependentUpon>202207311516402_Edit5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207311520319_Edit6.cs" />
+    <Compile Include="Migrations\202207311520319_Edit6.designer.cs">
+      <DependentUpon>202207311520319_Edit6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207311536592_Edit7.cs" />
+    <Compile Include="Migrations\202207311536592_Edit7.designer.cs">
+      <DependentUpon>202207311536592_Edit7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208011210217_Edit8.cs" />
+    <Compile Include="Migrations\202208011210217_Edit8.designer.cs">
+      <DependentUpon>202208011210217_Edit8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208021024013_Edit9.cs" />
+    <Compile Include="Migrations\202208021024013_Edit9.designer.cs">
+      <DependentUpon>202208021024013_Edit9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208021134194_Edit10.cs" />
+    <Compile Include="Migrations\202208021134194_Edit10.designer.cs">
+      <DependentUpon>202208021134194_Edit10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208030625341_Edit11.cs" />
+    <Compile Include="Migrations\202208030625341_Edit11.designer.cs">
+      <DependentUpon>202208030625341_Edit11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208030820353_Edit12.cs" />
+    <Compile Include="Migrations\202208030820353_Edit12.designer.cs">
+      <DependentUpon>202208030820353_Edit12.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,14 +134,35 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202207200437575_AddDb.resx">
-      <DependentUpon>202207200437575_AddDb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207311215401_AddDb.resx">
+      <DependentUpon>202207311215401_AddDb.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.resx">
-      <DependentUpon>202207210444214_AddVehicleTblVehicleRequestConfirmedTblVehicleRequestTbl.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207311507277_Edit4.resx">
+      <DependentUpon>202207311507277_Edit4.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207240928023_EditVehicleRequestConfirmedTbl.resx">
-      <DependentUpon>202207240928023_EditVehicleRequestConfirmedTbl.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207311516402_Edit5.resx">
+      <DependentUpon>202207311516402_Edit5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207311520319_Edit6.resx">
+      <DependentUpon>202207311520319_Edit6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207311536592_Edit7.resx">
+      <DependentUpon>202207311536592_Edit7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208011210217_Edit8.resx">
+      <DependentUpon>202208011210217_Edit8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208021024013_Edit9.resx">
+      <DependentUpon>202208021024013_Edit9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208021134194_Edit10.resx">
+      <DependentUpon>202208021134194_Edit10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208030625341_Edit11.resx">
+      <DependentUpon>202208030625341_Edit11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208030820353_Edit12.resx">
+      <DependentUpon>202208030820353_Edit12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

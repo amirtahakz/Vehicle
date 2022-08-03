@@ -11,19 +11,13 @@ namespace Vehicle.Bll.Repositories
     {
         #region IMethods
 
-        Task AddVehicleRequestAsync(VehicleRequest model);
+        Task<VehicleRequest> AddVehicleRequestAsync(VehicleRequest model);
 
-        ICollection<VehicleRequest> GetVehicleRequests();
+        //Task ConfirmVehicleRequestAsync(Guid id);
 
-        ICollection<VehicleRequest> GetVehicleRequestConfirmedsByEmplyeeId(string id);
+        //ICollection<VehicleRequest> GetVehicleRequestsByUserId(string userId);
 
-        ICollection<VehicleRequest> GetVehicleRequestNotConfirmedsBySecretary();
-
-        ICollection<VehicleRequest> GetVehicleRequestNotConfirmedsByDriver();
-
-        Task UpdateVehicleRequestAsync(VehicleRequest model);
-
-        Task<VehicleRequest> GetVehicleRequestByIdAsync(Guid Id);
+        //ICollection<VehicleRequest> GetVehicleRequestsNotConfirmed();
 
 
         #endregion

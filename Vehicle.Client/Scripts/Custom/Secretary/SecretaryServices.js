@@ -41,27 +41,26 @@ $(document).on("click", '#add-vehicle-btn', function () {
     });
 });
 
-$('#vehicle-request-not-confirmeds-tbl-secretary').ready(function () {
+$('#confirmations-not-confirmed-tbl-secretary').ready(function () {
     $.ajax({
         type: "GET",
-        url: "https://localhost:44305/Secretary/VehicleRequest/GetVehicleRequestNotConfirmeds",
+        url: "https://localhost:44305/Secretary/Confirmation/GetConfirmationsNotConfirmedBySecretary",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
             $.each(response, function (indexInArray, valueOfElement) {
-                $('#vehicle-request-not-confirmeds-tbl-secretary > tbody:last-child').append(`
+                $('#confirmations-not-confirmed-tbl-secretary > tbody:last-child').append(`
                            <tr>
                               <th scope="row"> ${indexInArray} </th>
-                              <td> ${valueOfElement.EmployeeId} </td>
-                              <td> ${valueOfElement.VehicleId} </td>
-                              <td> ${valueOfElement.Origin} </td>
-                              <td> ${valueOfElement.Destination} </td>
-                              <td> ${valueOfElement.Description} </td>
+                              <td> ${valueOfElement.VehicleRequest.Origin} </td>
+                              <td> ${valueOfElement.VehicleRequest.Destination} </td>
+                              <td> ${valueOfElement.VehicleRequest.Description} </td>
+                              <td> ${valueOfElement.VehicleRequest.Vehicle.Name} </td>
                               <td>
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updataUserModal" id="confirm-vehicle-request-btn">تایید</button>
-                              </td> 
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updataUserModal" id="confirm-first-step-confirmation-btn">تایید</button>
+                              </td>
                               <td>
-                                <input type="hidden" id="vehicle-request-not-confirmed-id" value="${valueOfElement.Id}"/>
+                                <input type="hidden" id="confirmation-id" value="${valueOfElement.Id}"/>
                               </td>
                            </tr>
                                `);
@@ -70,16 +69,16 @@ $('#vehicle-request-not-confirmeds-tbl-secretary').ready(function () {
     });
 });
 
-$(document).on("click", '#confirm-vehicle-request-btn', function () {
-    var VehicleRequestId = document.getElementById("vehicle-request-not-confirmed-id").value;
+$(document).on("click", '#confirm-first-step-confirmation-btn', function () {
+    var ConfirmationId = document.getElementById("confirmation-id").value;
     var SecretaryId = document.getElementById("secretary-id-layout").value;
     var data0 = {
-        VehicleRequestId: VehicleRequestId,
+        ConfirmationId: ConfirmationId,
         SecretaryId: SecretaryId,
     };
     $.ajax({
         type: "POST",
-        url: "https://localhost:44305/Secretary/VehicleRequest/ConfirmVehicleRequest",
+        url: "https://localhost:44305/Secretary/Confirmation/ConfirmConfirmation",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(data0),
@@ -92,24 +91,27 @@ $(document).on("click", '#confirm-vehicle-request-btn', function () {
 
 
 
-$('#vehicle-request-confirmeds-by-secretary-tbl-secretary').ready(function () {
+$('#confirmation-confirmed-by-secretary-tbl-secretary').ready(function () {
     var SecretaryId = document.getElementById("secretary-id-layout").value;
     var data0 = {
         SecretaryId: SecretaryId,
     };
     $.ajax({
         type: "POST",
-        url: "https://localhost:44305/Secretary/VehicleRequestConfirmed/GetVehicleRequestConfirmedsBySecretaryId",
+        url: "https://localhost:44305/Secretary/ConfirmationsUsersWhoConfirmed/GetConfirmationsConfirmedBySecretary",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(data0),
         success: function (response) {
             $.each(response, function (indexInArray, valueOfElement) {
                 console.log(valueOfElement)
-                $('#vehicle-request-confirmeds-by-secretary-tbl-secretary > tbody:last-child').append(`
+                $('#confirmation-confirmed-by-secretary-tbl-secretary > tbody:last-child').append(`
                            <tr>
-                              <th scope="row"> ${indexInArray} </th>
-                              <td> ${valueOfElement.VehicleRequestId} </td>
+                              <th scope="row"> ${indexInArray} </th>                       
+                              <td> ${valueOfElement.VehicleRequest.Origin} </td>
+                              <td> ${valueOfElement.VehicleRequest.Destination} </td>
+                              <td> ${valueOfElement.VehicleRequest.Description} </td>
+                              <td> ${valueOfElement.VehicleRequest.Vehicle.Name} </td>
                            </tr>
                                `);
             });

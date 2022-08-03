@@ -34,7 +34,8 @@ namespace Vehicle.Client
             container.RegisterType<IEmailServiceBusiness, EmailServiceBusiness>();
             container.RegisterType<IVehicleServiceBusiness, VehicleServiceBusiness>();
             container.RegisterType<IVehicleRequestServiceBusiness, VehicleRequestServiceBusiness>();
-            container.RegisterType<IVehicleRequestConfirmedServiceBusiness, VehicleRequestConfirmedServiceBusiness>();
+            container.RegisterType<IConfirmationServiceBusiness, ConfirmationServiceBusiness>();
+            container.RegisterType<IConfirmationsUsersWhoConfirmedServiceBusiness, ConfirmationsUsersWhoConfirmedServiceBusiness>();
 
             #endregion
 
@@ -43,7 +44,8 @@ namespace Vehicle.Client
             container.RegisterType<Vehicle.Core.Repositories.IEmailService, Vehicle.Core.Services.EmailService>();
             container.RegisterType<IVehicleService, VehicleService>();
             container.RegisterType<IVehicleRequestService, VehicleRequestService>();
-            container.RegisterType<IVehicleRequestConfirmedService, VehicleRequestConfirmedService>();
+            container.RegisterType<IConfirmationService, ConfirmationService>();
+            container.RegisterType<IConfirmationsUsersWhoConfirmedService, ConfirmationsUsersWhoConfirmedService>();
 
             #endregion
 

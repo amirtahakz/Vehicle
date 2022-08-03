@@ -16,50 +16,39 @@ namespace Vehicle.Client.Areas.Employee.Controllers
         #region Connections
 
         private readonly IVehicleRequestServiceBusiness _vehicleRequestServiceBusiness;
-        public VehicleRequestController(IVehicleRequestServiceBusiness vehicleRequestServiceBusiness)
+        private readonly IConfirmationServiceBusiness _confirmationServiceBusiness;
+        public VehicleRequestController(IVehicleRequestServiceBusiness vehicleRequestServiceBusiness , IConfirmationServiceBusiness confirmationServiceBusiness)
         {
             _vehicleRequestServiceBusiness = vehicleRequestServiceBusiness;
+            _confirmationServiceBusiness = confirmationServiceBusiness;
         }
 
         #endregion
 
 
         // GET: Employee/VehicleRequest
-        public ActionResult VehicleRequests()
-        {
-            return View();
-        }
 
         [HttpPost]
         public async Task<ActionResult> AddVehicleRequest(AddVehicleRequestVm model)
         {
             if (!ModelState.IsValid) return View(model);
-            await _vehicleRequestServiceBusiness.AddVehicleRequestAsync(new Data.Entities.VehicleRequest()
+
+            var res = await _vehicleRequestServiceBusiness.AddVehicleRequestAsync(new Data.Entities.VehicleRequest()
             {
                 Description = model.Description,
                 Destination = model.Destination,
                 Origin = model.Origin,
-                EmployeeId = model.EmployeeId,
-                VehicleId = model.VehicleId          
+                VehicleId = model.VehicleId
+            });
+
+            await _confirmationServiceBusiness.AddConfirmationAsync(new Data.Entities.Confirmation()
+            {
+                UserId = model.EmployeeId,
+                VehicleRequestId = res.Id
             });
 
             return View();
         }
 
-        public JsonResult GetVehicleRequests()
-        {
-            var result = _vehicleRequestServiceBusiness.GetVehicleRequests();
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult VehicleRequestConfirmeds()
-        {
-            return View();
-        }
-        public JsonResult GetVehicleRequestConfirmedsByEmplyeeId(GetVehicleRequestConfirmedsByEmplyeeIdVm model)
-        {
-            var result = _vehicleRequestServiceBusiness.GetVehicleRequestConfirmedsByEmplyeeId(model.EmployeeId);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
     }
 }
